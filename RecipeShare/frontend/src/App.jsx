@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import api from "./api";
 
-// Components
 import Navbar from "./components/Navbar";
 import Toast from "./components/Toast";
 
-// Pages
 import HomePage from "./pages/HomePage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import CreateRecipePage from "./pages/CreateRecipePage";
@@ -20,7 +18,6 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [toasts, setToasts] = useState([]);
 
-  // Check stored user session
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem("recipeshare_user");
@@ -58,7 +55,6 @@ export default function App() {
     }
   };
 
-  // Like recipe
   const handleLike = async (id) => {
     try {
       const username = currentUser ? currentUser.username : "guest";
@@ -71,8 +67,6 @@ export default function App() {
       addToast(err.response?.data?.message || "Failed to like recipe", "error");
     }
   };
-
-  // Save recipe
   const handleSave = async (id) => {
     if (!currentUser) return;
     try {
@@ -86,7 +80,6 @@ export default function App() {
     }
   };
 
-  // Recipe creation / update handlers
   const handleRecipeCreated = (newRecipe) => {
     setRecipes((prev) => [newRecipe, ...prev]);
   };
@@ -102,7 +95,6 @@ export default function App() {
     setRecipes((prev) => prev.filter((r) => (r._id || r.id) !== deletedId));
   };
 
-  // Auth handlers
   const handleLoginSuccess = (user) => {
     setCurrentUser(user);
     localStorage.setItem("recipeshare_user", JSON.stringify(user));
@@ -115,7 +107,6 @@ export default function App() {
     addToast("Logged out.", "info");
   };
 
-  // If user is not authenticated, ONLY show the Login gate!
   if (!currentUser) {
     return (
       <div className="app-container">
@@ -134,7 +125,6 @@ export default function App() {
     );
   }
 
-  // Once authenticated with correct DB credentials, access the full portal:
   const savedCount = recipes.filter(
     (r) => Array.isArray(r.savedBy) && r.savedBy.includes(currentUser.username)
   ).length;
