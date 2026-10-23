@@ -11,25 +11,18 @@ export default function SavedRecipesPage({ recipes, currentUser, onLike, onSave 
 
   return (
     <div className="container">
-      <div className="section-header">
-        <div>
-          <h1 className="section-title">💖 Your Saved Cookbook</h1>
-          <p className="section-subtitle">
-            Bookmarked recipes you plan to cook and love
-          </p>
-        </div>
-        <div className="count-badge">{savedRecipes.length} saved</div>
+      <div style={{ marginBottom: "15px" }}>
+        <h2 style={{ fontSize: "1.5rem", marginBottom: "4px" }}>Saved Recipes</h2>
+        <p style={{ color: "#666", fontSize: "0.9rem" }}>
+          Recipes you have bookmarked ({savedRecipes.length})
+        </p>
       </div>
 
       {savedRecipes.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "5rem 1rem", background: "white", borderRadius: "16px", border: "2px dashed #e2e8f0", maxWidth: "540px", margin: "2rem auto" }}>
-          <div style={{ fontSize: "3.5rem" }}>🔖</div>
-          <h3 style={{ marginTop: "1rem", fontSize: "1.3rem" }}>Your cookbook is empty</h3>
-          <p style={{ color: "var(--text-muted)", marginTop: "0.5rem" }}>
-            Tap the heart or save icon on any recipe to keep it in your personal cookbook!
-          </p>
-          <Link to="/" className="btn btn-primary" style={{ marginTop: "1.5rem" }}>
-            Explore Delicious Recipes 🍳
+        <div className="empty-box">
+          <p>You have not saved any recipes yet.</p>
+          <Link to="/" className="btn btn-sm btn-primary" style={{ marginTop: "10px" }}>
+            Browse Recipes
           </Link>
         </div>
       ) : (

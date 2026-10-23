@@ -17,64 +17,49 @@ export default function Navbar({ searchQuery, setSearchQuery, currentUser, onLog
   };
 
   return (
-    <header class="navbar">
+    <header className="navbar">
       <div className="nav-inner">
-        {/* Brand */}
-        <Link to="/" className="brand" onClick={clearSearch}>
-          <span className="brand-icon">🍳</span>
-          <div>
-            <div className="brand-name">RecipeShare</div>
-            <div className="brand-tag">Taste Community</div>
-          </div>
+        <Link to="/" className="brand-title" onClick={clearSearch}>
+          RecipeShare
         </Link>
 
-        {/* Live Search */}
         <div className="nav-search">
-          <span className="nav-search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Search by ingredient (e.g. garlic, chicken, cheese)..."
+            placeholder="Search by ingredient or title..."
             value={searchQuery}
             onChange={handleSearchChange}
           />
           {searchQuery && (
-            <button className="nav-search-clear" onClick={clearSearch} title="Clear">
-              ✕
+            <button className="btn btn-sm" onClick={clearSearch}>
+              Clear
             </button>
           )}
         </div>
 
-        {/* Nav Links & Actions */}
         <div className="nav-actions">
-          <Link
-            to="/saved"
-            className={`nav-link-btn ${location.pathname === "/saved" ? "active" : ""}`}
-            title="Saved Recipes"
-          >
-            <span>💖</span>
-            <span>Saved</span>
-            {savedCount > 0 && <span className="badge-counter">{savedCount}</span>}
+          <Link to="/" className="btn btn-sm">
+            Home
           </Link>
 
-          <Link to="/create" className="btn btn-primary">
-            <span>➕</span>
-            <span>New Recipe</span>
+          <Link to="/saved" className="btn btn-sm">
+            Saved ({savedCount})
+          </Link>
+
+          <Link to="/create" className="btn btn-sm btn-primary">
+            Add Recipe
           </Link>
 
           {currentUser ? (
-            <div className="user-nav-pill">
-              <div className="user-avatar">
-                {(currentUser.name || currentUser.username || "U")[0].toUpperCase()}
-              </div>
-              <span>{currentUser.name || currentUser.username}</span>
-              <button className="logout-btn" onClick={onLogout} title="Logout">
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span className="user-badge">{currentUser.name || currentUser.username}</span>
+              <button className="btn btn-sm" onClick={onLogout}>
                 Logout
               </button>
             </div>
           ) : (
-            <Link to="/login" className="btn btn-outline">
-              <span>👤</span>
-              <span>Sign In</span>
+            <Link to="/login" className="btn btn-sm">
+              Login
             </Link>
           )}
         </div>

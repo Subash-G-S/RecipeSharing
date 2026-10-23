@@ -4,35 +4,25 @@ const path = require("path");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
-
 const storage = require("./storage");
-
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// Configure Cloudinary if credentials are provided in .env
 const isCloudinaryConfigured = Boolean(
   process.env.CLOUDINARY_CLOUD_NAME &&
   process.env.CLOUDINARY_API_KEY &&
   process.env.CLOUDINARY_API_SECRET
 );
-
 if (isCloudinaryConfigured) {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
   });
-  console.log("☁️ Cloudinary initialized for permanent cloud media storage!");
+  console.log("Cloudinary initialized for permanent cloud media storage!");
 }
-
-// Multer Storage Configuration:
-// Uses in-memory buffer if Cloudinary is active (for direct streaming to cloud),
-// or local disk storage as a reliable fallback.
 const memoryStorage = multer.memoryStorage();
 const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -44,19 +34,14 @@ const diskStorage = multer.diskStorage({
     cb(null, `recipe-${unique}${ext}`);
   }
 });
-
 const upload = multer({
   storage: isCloudinaryConfigured ? memoryStorage : diskStorage,
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 }
 });
-
-// Image Upload Endpoint (Cloudinary + Multer)
 app.post("/api/upload", upload.single("image"), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No image file provided." });
   }
-
-  // 1. If Cloudinary is configured, stream directly to Cloudinary
   if (isCloudinaryConfigured) {
     try {
       const uploadToCloudinary = () => {
@@ -86,13 +71,9 @@ app.post("/api/upload", upload.single("image"), async (req, res) => {
       return res.status(500).json({ message: "Cloudinary upload failed: " + err.message });
     }
   }
-
-  // 2. Otherwise, use local disk upload
   const imageUrl = `/uploads/${req.file.filename}`;
   res.json({ imageUrl, message: "Image uploaded to local storage successfully!" });
 });
-
-// REST Endpoints
 app.get("/api/recipes", async (req, res) => {
   try {
     const { search, page = 1, limit = 50 } = req.query;
@@ -102,7 +83,6 @@ app.get("/api/recipes", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
 app.post("/api/recipes", async (req, res) => {
   try {
     const { title, ingredients, steps, cookingTime, imageUrl, author } = req.body;

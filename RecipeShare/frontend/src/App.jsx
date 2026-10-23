@@ -35,7 +35,7 @@ export default function App() {
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3200);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function App() {
       setRecipes((prev) =>
         prev.map((r) => ((r._id || r.id) === id ? { ...r, likes: res.data.likes } : r))
       );
-      addToast("Recipe liked! ❤️", "success");
+      addToast("Recipe liked.", "success");
     } catch (err) {
       addToast(err.response?.data?.message || "Failed to like recipe", "error");
     }
@@ -112,20 +112,16 @@ export default function App() {
     setCurrentUser(null);
     localStorage.removeItem("recipeshare_user");
     setRecipes([]);
-    addToast("Logged out from portal.", "info");
+    addToast("Logged out.", "info");
   };
 
   // If user is not authenticated, ONLY show the Login gate!
   if (!currentUser) {
     return (
-      <div className="app-container" style={{ background: "linear-gradient(135deg, #fff7ed 0%, #f8fafc 100%)" }}>
-        <header className="navbar" style={{ justifyContent: "center", display: "flex" }}>
-          <div className="brand" style={{ cursor: "default" }}>
-            <span className="brand-icon">🍳</span>
-            <div>
-              <div className="brand-name">RecipeShare</div>
-              <div className="brand-tag">Authentication Portal</div>
-            </div>
+      <div className="app-container">
+        <header className="navbar">
+          <div className="nav-inner" style={{ justifyContent: "center" }}>
+            <span className="brand-title">RecipeShare - Login Portal</span>
           </div>
         </header>
 

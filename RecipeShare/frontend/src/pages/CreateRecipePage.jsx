@@ -16,10 +16,10 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
   const [submitting, setSubmitting] = useState(false);
 
   const sampleImages = [
-    { label: "🥗 Fresh Salad", url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" },
-    { label: "🍕 Crispy Pizza", url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" },
-    { label: "🍝 Rich Pasta", url: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80" },
-    { label: "🍰 Berry Cake", url: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" }
+    { label: "Salad", url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" },
+    { label: "Pizza", url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" },
+    { label: "Pasta", url: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80" },
+    { label: "Dessert", url: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" }
   ];
 
   const handleFileUpload = async (e) => {
@@ -35,9 +35,9 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
         headers: { "Content-Type": "multipart/form-data" }
       });
       setImageUrl(res.data.imageUrl);
-      addToast("Photo uploaded successfully!", "success");
+      addToast("Image uploaded successfully.", "success");
     } catch (err) {
-      addToast(err.response?.data?.message || "Image upload failed", "error");
+      addToast(err.response?.data?.message || "Image upload failed.", "error");
     } finally {
       setUploading(false);
     }
@@ -57,7 +57,7 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
     const payload = {
       title: title.trim(),
       cookingTime: Number(cookingTime) || 15,
-      author: author.trim() || "Chef",
+      author: author.trim() || "Anonymous",
       imageUrl: imageUrl.trim() || "https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=800&q=80",
       ingredients,
       steps
@@ -66,11 +66,11 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
     try {
       setSubmitting(true);
       const res = await api.post("/recipes", payload);
-      addToast("Recipe published successfully! 🍳", "success");
+      addToast("Recipe created successfully.", "success");
       if (onRecipeCreated) onRecipeCreated(res.data);
       navigate(`/recipe/${res.data._id || res.data.id}`);
     } catch (err) {
-      addToast(err.response?.data?.message || "Failed to create recipe", "error");
+      addToast(err.response?.data?.message || "Failed to create recipe.", "error");
     } finally {
       setSubmitting(false);
     }
@@ -78,32 +78,25 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
 
   return (
     <div className="container">
-      <Link to="/" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", marginBottom: "1rem", fontWeight: 600, color: "var(--primary)" }}>
-        ← Back to Recipes
+      <Link to="/" className="btn btn-sm" style={{ marginBottom: "15px" }}>
+        Back to Recipes
       </Link>
 
-      <div className="form-card">
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", marginBottom: "0.4rem" }}>
-          Share a New Recipe
-        </h2>
-        <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.8rem" }}>
-          Fill in the ingredients and steps to share your dish with the community.
-        </p>
+      <div className="form-box">
+        <h2 className="form-title">Add New Recipe</h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Title */}
           <div className="form-group">
             <label>Recipe Title *</label>
             <input
               type="text"
-              placeholder="e.g. Crispy Garlic Parmesan Fries"
+              placeholder="e.g. Tomato Garlic Pasta"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
             />
           </div>
 
-          {/* Time & Author */}
           <div className="form-row">
             <div className="form-group">
               <label>Cooking Time (minutes) *</label>
@@ -117,7 +110,7 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
               />
             </div>
             <div className="form-group">
-              <label>Author / Chef Name</label>
+              <label>Author Name</label>
               <input
                 type="text"
                 placeholder="Your name"
@@ -127,25 +120,22 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
             </div>
           </div>
 
-          {/* Image Choice */}
           <div className="form-group">
-            <label>Recipe Dish Image</label>
-            <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem" }}>
+            <label>Recipe Image</label>
+            <div style={{ display: "flex", gap: "6px", marginBottom: "8px" }}>
               <button
                 type="button"
-                className={`chip ${imageTab === "url" ? "active" : ""}`}
-                style={{ padding: "0.3rem 0.8rem", fontSize: "0.82rem" }}
+                className={`filter-btn ${imageTab === "url" ? "active" : ""}`}
                 onClick={() => setImageTab("url")}
               >
-                Image URL
+                Use Image URL
               </button>
               <button
                 type="button"
-                className={`chip ${imageTab === "upload" ? "active" : ""}`}
-                style={{ padding: "0.3rem 0.8rem", fontSize: "0.82rem" }}
+                className={`filter-btn ${imageTab === "upload" ? "active" : ""}`}
                 onClick={() => setImageTab("upload")}
               >
-                Upload File
+                Upload Image File
               </button>
             </div>
 
@@ -153,18 +143,18 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
               <div>
                 <input
                   type="url"
-                  placeholder="Paste image URL (https://...)"
+                  placeholder="https://..."
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                 />
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.5rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>
-                  <span>Quick Presets:</span>
+                <div style={{ display: "flex", gap: "8px", marginTop: "6px", fontSize: "0.8rem", color: "#666" }}>
+                  <span>Quick samples:</span>
                   {sampleImages.map((s, i) => (
                     <a
                       key={i}
                       href="javascript:void(0)"
                       onClick={() => setImageUrl(s.url)}
-                      style={{ color: "var(--primary)", fontWeight: 600 }}
+                      style={{ color: "#0066cc" }}
                     >
                       {s.label}
                     </a>
@@ -172,68 +162,55 @@ export default function CreateRecipePage({ currentUser, onRecipeCreated, addToas
                 </div>
               </div>
             ) : (
-              <div className="file-drop">
+              <div>
                 <input type="file" accept="image/*" onChange={handleFileUpload} />
-                <div style={{ fontWeight: 600, fontSize: "0.9rem" }}>
-                  {uploading ? "⏳ Uploading photo..." : "📸 Click or drag dish photo to upload"}
-                </div>
-                <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.2rem" }}>
-                  JPG, PNG, or WEBP up to 5MB
+                <div className="help-text">
+                  {uploading ? "Uploading image..." : "PNG, JPG up to 5MB"}
                 </div>
               </div>
             )}
 
-            {/* Preview */}
             {imageUrl && (
-              <div style={{ marginTop: "0.75rem", display: "inline-block", position: "relative" }}>
+              <div style={{ marginTop: "10px" }}>
                 <img
                   src={imageUrl.startsWith("/") ? `http://localhost:5000${imageUrl}` : imageUrl}
                   alt="Preview"
-                  style={{ width: "120px", height: "80px", objectFit: "cover", borderRadius: "8px", border: "1px solid var(--border-color)" }}
+                  style={{ width: "120px", height: "80px", objectFit: "cover", border: "1px solid #ccc", borderRadius: "4px" }}
                 />
-                <button
-                  type="button"
-                  onClick={() => setImageUrl("")}
-                  style={{ position: "absolute", top: 4, right: 4, background: "rgba(0,0,0,0.6)", color: "white", border: "none", borderRadius: 4, padding: "2px 6px", fontSize: "0.7rem", cursor: "pointer" }}
-                >
-                  ✕
-                </button>
               </div>
             )}
           </div>
 
-          {/* Ingredients */}
           <div className="form-group">
-            <label>Ingredients Array (1 per line) *</label>
-            <span className="hint">Enter each ingredient on a new line</span>
+            <label>Ingredients (1 per line) *</label>
             <textarea
               rows="4"
-              placeholder="4 large potatoes, cut into fries&#10;2 tbsp olive oil&#10;3 cloves garlic, minced&#10;1/2 cup parmesan cheese grated"
+              placeholder="1 cup flour&#10;2 eggs&#10;1/2 cup milk"
               value={ingredientsText}
               onChange={(e) => setIngredientsText(e.target.value)}
               required
             />
+            <div className="help-text">Type each ingredient on a new line</div>
           </div>
 
-          {/* Steps */}
           <div className="form-group">
-            <label>Steps Array (1 step per line) *</label>
-            <span className="hint">Enter each preparation or cooking step on a new line</span>
+            <label>Cooking Steps (1 step per line) *</label>
             <textarea
               rows="4"
-              placeholder="Soak cut potatoes in cold water for 30 minutes.&#10;Pat dry and toss with olive oil and garlic.&#10;Bake at 220°C for 25 minutes until crispy.&#10;Toss with parmesan and serve warm."
+              placeholder="Mix dry ingredients.&#10;Add milk and eggs.&#10;Cook in pan for 5 minutes."
               value={stepsText}
               onChange={(e) => setStepsText(e.target.value)}
               required
             />
+            <div className="help-text">Type each step on a new line</div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.85rem", marginTop: "1.5rem" }}>
-            <Link to="/" className="btn btn-secondary">
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "15px" }}>
+            <Link to="/" className="btn">
               Cancel
             </Link>
             <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? "Publishing..." : "Publish Recipe 🚀"}
+              {submitting ? "Saving..." : "Create Recipe"}
             </button>
           </div>
         </form>

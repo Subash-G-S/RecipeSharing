@@ -5,59 +5,51 @@ import { resolveImageUrl } from "../api";
 export default function RecipeCard({ recipe, isSaved, onLike, onSave }) {
   const id = recipe._id || recipe.id;
   const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
-  const tags = ingredients.slice(0, 3);
-  const extraCount = ingredients.length - 3;
 
   return (
     <div className="recipe-card">
-      <div className="card-img-wrapper">
-        <img
-          className="card-img"
-          src={resolveImageUrl(recipe.imageUrl)}
-          alt={recipe.title}
-          loading="lazy"
-        />
-        <div className="card-time-badge">⏱️ {recipe.cookingTime || 15} min</div>
-        <button
-          className={`card-save-btn ${isSaved ? "saved" : ""}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onSave(id);
-          }}
-          title={isSaved ? "Saved in cookbook" : "Save to cookbook"}
-        >
-          {isSaved ? "💖" : "🤍"}
-        </button>
-      </div>
+      <img
+        className="card-image"
+        src={resolveImageUrl(recipe.imageUrl)}
+        alt={recipe.title}
+        loading="lazy"
+      />
 
-      <div className="card-content">
-        <span className="card-author">By {recipe.author || "Chef"}</span>
+      <div className="card-body">
         <h3 className="card-title">{recipe.title}</h3>
-
-        <div className="card-tags">
-          {tags.map((tag, idx) => (
-            <span key={idx} className="card-tag">
-              {tag.split(",")[0].trim()}
-            </span>
-          ))}
-          {extraCount > 0 && <span className="card-tag">+{extraCount} more</span>}
+        <div className="card-meta">
+          By {recipe.author || "Anonymous"} | Time: {recipe.cookingTime || 15} mins
         </div>
 
-        <div className="card-footer">
+        <div className="card-ingredients">
+          <strong>Ingredients:</strong>{" "}
+          {ingredients.slice(0, 3).map((item) => item.split(",")[0].trim()).join(", ")}
+          {ingredients.length > 3 ? "..." : ""}
+        </div>
+
+        <div className="card-actions">
           <button
-            className="card-like-btn"
+            className="btn btn-sm"
             onClick={(e) => {
               e.stopPropagation();
               onLike(id);
             }}
-            title="Like recipe"
           >
-            <span>❤️</span>
-            <span>{recipe.likes || 0}</span>
+            Like ({recipe.likes || 0})
           </button>
 
-          <Link to={`/recipe/${id}`} className="card-link">
-            View Recipe ➔
+          <button
+            className={`btn btn-sm ${isSaved ? "btn-primary" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSave(id);
+            }}
+          >
+            {isSaved ? "Saved" : "Save"}
+          </button>
+
+          <Link to={`/recipe/${id}`} className="btn btn-sm btn-primary">
+            View
           </Link>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
       setIngredientsText(Array.isArray(r.ingredients) ? r.ingredients.join("\n") : "");
       setStepsText(Array.isArray(r.steps) ? r.steps.join("\n") : "");
     } catch (err) {
-      addToast(err.response?.data?.message || "Could not load recipe to edit", "error");
+      addToast(err.response?.data?.message || "Could not load recipe", "error");
       navigate("/");
     } finally {
       setLoading(false);
@@ -61,11 +61,11 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
     try {
       setSaving(true);
       const res = await api.put(`/recipes/${id}`, payload);
-      addToast("Recipe updated successfully! ✨", "success");
+      addToast("Recipe updated successfully.", "success");
       if (onRecipeUpdated) onRecipeUpdated(res.data);
       navigate(`/recipe/${id}`);
     } catch (err) {
-      addToast(err.response?.data?.message || "Failed to update recipe", "error");
+      addToast(err.response?.data?.message || "Failed to update recipe.", "error");
     } finally {
       setSaving(false);
     }
@@ -73,25 +73,20 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
 
   if (loading) {
     return (
-      <div className="container" style={{ textAlign: "center", padding: "5rem 0" }}>
-        <p style={{ fontSize: "1.2rem", color: "var(--text-muted)" }}>Loading recipe...</p>
+      <div className="container">
+        <div className="empty-box">Loading recipe...</div>
       </div>
     );
   }
 
   return (
     <div className="container">
-      <Link to={`/recipe/${id}`} style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", marginBottom: "1rem", fontWeight: 600, color: "var(--primary)" }}>
-        ← Back to Recipe
+      <Link to={`/recipe/${id}`} className="btn btn-sm" style={{ marginBottom: "15px" }}>
+        Back to Recipe
       </Link>
 
-      <div className="form-card">
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", marginBottom: "0.4rem" }}>
-          Edit Recipe
-        </h2>
-        <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.8rem" }}>
-          Update the recipe details and steps below.
-        </p>
+      <div className="form-box">
+        <h2 className="form-title">Edit Recipe</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -117,7 +112,7 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
               />
             </div>
             <div className="form-group">
-              <label>Author / Chef Name</label>
+              <label>Author Name</label>
               <input
                 type="text"
                 value={author}
@@ -127,7 +122,7 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
           </div>
 
           <div className="form-group">
-            <label>Recipe Dish Image URL</label>
+            <label>Recipe Image URL</label>
             <input
               type="url"
               value={imageUrl}
@@ -146,7 +141,7 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
           </div>
 
           <div className="form-group">
-            <label>Steps (1 per line) *</label>
+            <label>Cooking Steps (1 per line) *</label>
             <textarea
               rows="4"
               value={stepsText}
@@ -155,12 +150,12 @@ export default function EditRecipePage({ addToast, onRecipeUpdated }) {
             />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.85rem", marginTop: "1.5rem" }}>
-            <Link to={`/recipe/${id}`} className="btn btn-secondary">
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "15px" }}>
+            <Link to={`/recipe/${id}`} className="btn">
               Cancel
             </Link>
             <button type="submit" className="btn btn-primary" disabled={saving}>
-              {saving ? "Saving Changes..." : "Save Changes ✨"}
+              {saving ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>
