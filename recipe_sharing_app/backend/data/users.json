@@ -1,0 +1,20 @@
+[
+  {
+    "id": "usr_001",
+    "username": "demo",
+    "password": "password123",
+    "name": "Subash Chef"
+  },
+  {
+    "id": "usr_002",
+    "username": "maria",
+    "password": "password123",
+    "name": "Maria Rossi"
+  },
+  {
+    "id": "usr_1792681032416",
+    "username": "Akhil Chef",
+    "password": "Akhil0224",
+    "name": "Akhil"
+  }
+]

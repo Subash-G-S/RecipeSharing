@@ -1,0 +1,159 @@
+[
+  {
+    "_id": "rec_101",
+    "title": "Creamy Tuscan Garlic Butter Chicken",
+    "ingredients": [
+      "2 boneless chicken breasts, sliced into cutlets",
+      "4 cloves garlic, finely minced",
+      "1 cup heavy whipping cream",
+      "1/2 cup chicken stock",
+      "1 cup fresh baby spinach leaves",
+      "1/2 cup sun-dried tomatoes, drained and sliced",
+      "1/2 cup grated aged parmesan cheese",
+      "2 tbsp olive oil and 1 tbsp butter",
+      "Salt, freshly cracked pepper, and dried oregano"
+    ],
+    "steps": [
+      "Season chicken cutlets on both sides with salt, pepper, and oregano.",
+      "Heat olive oil and butter in a large skillet over medium-high heat. Sear chicken for 4-5 minutes per side until golden brown, then set aside.",
+      "In the same skillet, sauté minced garlic and sun-dried tomatoes for 1 minute until fragrant.",
+      "Pour in chicken stock and heavy cream, bringing the sauce to a gentle simmer for 3 minutes.",
+      "Stir in spinach and parmesan until cheese is melted and spinach is wilted.",
+      "Return chicken to the skillet, spoon creamy sauce over, and simmer for another 2 minutes before serving."
+    ],
+    "cookingTime": 25,
+    "imageUrl": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80",
+    "author": "Chef Subash",
+    "likes": 25,
+    "savedBy": []
+  },
+  {
+    "_id": "rec_102",
+    "title": "Authentic Neapolitan Margherita Pizza",
+    "ingredients": [
+      "250g artisan pizza dough",
+      "1/2 cup San Marzano crushed tomato sauce",
+      "150g fresh mozzarella di bufala, sliced",
+      "Handful of fresh sweet basil leaves",
+      "1 tbsp extra virgin olive oil",
+      "Pinch of flaky sea salt"
+    ],
+    "steps": [
+      "Preheat oven with baking steel/stone to maximum temperature (250°C / 480°F).",
+      "Gently stretch dough on a lightly floured board, pressing out from center to create a puffy crust edge.",
+      "Spread tomato sauce evenly over the surface, leaving crust border clean.",
+      "Tear fresh mozzarella over sauce and drizzle with extra virgin olive oil.",
+      "Bake for 7-9 minutes until crust edges blister and cheese is bubbling.",
+      "Top immediately with fresh aromatic basil leaves and serve hot."
+    ],
+    "cookingTime": 20,
+    "imageUrl": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+    "author": "Maria Rossi",
+    "likes": 40,
+    "savedBy": [
+      "alex",
+      "akhil"
+    ]
+  },
+  {
+    "_id": "rec_103",
+    "title": "Spicy Thai Holy Basil Fried Rice",
+    "ingredients": [
+      "3 cups chilled day-old jasmine rice",
+      "250g minced chicken breast or pressed tofu",
+      "4 cloves garlic, roughly crushed",
+      "3 Thai bird's eye chilies, chopped",
+      "1 cup fresh holy basil leaves",
+      "1.5 tbsp dark soy sauce & 1 tbsp fish sauce",
+      "1 tbsp oyster sauce",
+      "1 crispy sunny-side up fried egg"
+    ],
+    "steps": [
+      "Crush garlic and bird's eye chilies together in a mortar to release natural oils.",
+      "Heat wok on high with oil; fry chili-garlic paste for 20 seconds until intensely aromatic.",
+      "Add minced chicken, stirring rapidly to break into bite-sized morsels until thoroughly cooked.",
+      "Add sauces followed by chilled jasmine rice, stir-frying on highest heat for 2 minutes.",
+      "Turn off flame, toss in holy basil until wilted, and top with a crispy wok-fried egg."
+    ],
+    "cookingTime": 15,
+    "imageUrl": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
+    "author": "Chef Somchai",
+    "likes": 31,
+    "savedBy": []
+  },
+  {
+    "_id": "rec_104",
+    "title": "Classic Roman Carbonara",
+    "ingredients": [
+      "200g bronze-die spaghetti or rigatoni",
+      "100g cured guanciale or pancetta, diced",
+      "3 large fresh egg yolks + 1 whole egg",
+      "50g Pecorino Romano, freshly grated",
+      "Plenty of freshly cracked coarse black pepper",
+      "Sea salt for boiling pasta water"
+    ],
+    "steps": [
+      "Bring water to a boil with moderate salt; cook pasta until al dente.",
+      "In a bowl, vigorously whisk egg yolks, whole egg, and pecorino cheese with cracked black pepper until thick.",
+      "In a deep pan, slowly render guanciale on medium heat until crisp and amber; remove pan from heat.",
+      "Transfer pasta directly into the pan with guanciale fat, tossing to coat thoroughly.",
+      "Allow pan to cool for 20 seconds, then pour egg-cheese mixture with 3 tbsp pasta water.",
+      "Vigorously stir until a glossy, velvety emulsion coats every strand of pasta. Serve immediately!"
+    ],
+    "cookingTime": 20,
+    "imageUrl": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80",
+    "author": "Chef Antonio",
+    "likes": 47,
+    "savedBy": []
+  },
+  {
+    "_id": "rec_105",
+    "title": "Japanese Fluffy Soufflé Pancakes",
+    "ingredients": [
+      "2 eggs, separated into yolks and whites",
+      "2 tbsp milk & 1 tsp pure vanilla extract",
+      "35g cake flour & 1/2 tsp baking powder",
+      "25g superfine sugar",
+      "Butter and pure maple syrup for serving"
+    ],
+    "steps": [
+      "Whisk yolks with milk and vanilla; sift in flour and baking powder and mix until smooth.",
+      "Whip egg whites while gradually adding sugar until stiff glossy peaks form.",
+      "Gently fold meringue into yolk batter in two additions, keeping the mixture airy.",
+      "Scoop tall towers of batter onto a lidded non-stick skillet on very low heat.",
+      "Add a splash of water, cover, and steam 4 minutes per side.",
+      "Serve hot with a pat of butter, warm maple syrup, and fresh berries."
+    ],
+    "cookingTime": 20,
+    "imageUrl": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=80",
+    "author": "Yuki Tanaka",
+    "likes": 54,
+    "savedBy": [
+      "demo"
+    ]
+  },
+  {
+    "_id": "rec_106",
+    "title": "Avocado & Poached Egg Artisan Toast",
+    "ingredients": [
+      "2 thick slices toasted sourdough",
+      "1 ripe Hass avocado, pitted and mashed",
+      "2 farm fresh eggs",
+      "1 tbsp freshly squeezed lemon juice",
+      "Red chili flakes & flaky Maldon sea salt",
+      "Microgreens for garnish"
+    ],
+    "steps": [
+      "Toast sourdough bread slices until golden brown and crispy.",
+      "Mash avocado with lemon juice, salt, and black pepper.",
+      "Poach eggs in gently simmering water for 3 minutes until whites set and yolk stays runny.",
+      "Generously spread avocado over toast and top each with a warm poached egg.",
+      "Sprinkle with flaky sea salt, red chili flakes, and microgreens."
+    ],
+    "cookingTime": 10,
+    "imageUrl": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80",
+    "author": "Emma Watson",
+    "likes": 29,
+    "savedBy": []
+  }
+]
